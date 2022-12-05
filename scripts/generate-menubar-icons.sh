@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This script generates the PNG/ICO menubar icons from the SVG files in `/menubar-icons/svg/`.
+# Please see /menubar-icons/README.md for more information.
+
 set -eu
 
 if ! command -v convert > /dev/null; then
