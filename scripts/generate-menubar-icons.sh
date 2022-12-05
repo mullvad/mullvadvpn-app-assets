@@ -34,6 +34,19 @@ COMPRESSION_OPTIONS=(
     -strip
 )
 
+function main() {
+    mkdir -p "$MACOS_DIR" "$WINDOWS_DIR" "$LINUX_DIR"
+
+    for frame in {1..9}; do
+        generate "lock-$frame" "lock-$frame"
+    done
+    # The monochrome source svg differs from the colored one. The red circle is a hole in the monochrome
+    # one. "lock-10_mono.svg" is the same icon but with a hole instead of a circle.
+    generate lock-10 lock-10_mono
+
+    rmdir "$TMP_DIR"
+}
+
 function generate_ico() {
     local svg_source_path="$1"
     local ico_target_path="$2"
@@ -108,14 +121,5 @@ function generate() {
     rm "$black_svg_source_path" "$white_svg_source_path"
 }
 
-mkdir -p "$MACOS_DIR" "$WINDOWS_DIR" "$LINUX_DIR"
-
-for frame in {1..9}; do
-    generate "lock-$frame" "lock-$frame"
-done
-# The monochrome source svg differs from the colored one. The red circle is a hole in the monochrome
-# one. "lock-10_mono.svg" is the same icon but with a hole instead of a circle.
-generate lock-10 lock-10_mono
-
-rmdir "$TMP_DIR"
+main
 
